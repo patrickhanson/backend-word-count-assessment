@@ -41,6 +41,38 @@ print_words() and print_top().
 
 import sys
 
+def print_words(filename):
+    word_dict = {}
+    fh = open(filename, 'r')
+    read_file = fh.read()
+    all_words = read_file.split()
+    for word in all_words:
+        lower_word = word.lower()
+        if lower_word in word_dict.keys():
+            word_dict[lower_word] += 1
+        else:
+            word_dict[lower_word] = 1
+    for word in sorted(word_dict.iterkeys()):
+        print word + ' ' + str(word_dict[word])
+    
+def print_top(filename):
+    word_dict = {}
+    fh = open(filename, 'r')
+    read_file = fh.read()
+    all_words = read_file.split()
+    for word in all_words:
+        lower_word = word.lower()
+        if lower_word in word_dict.keys():
+            word_dict[lower_word] += 1
+        else:
+            word_dict[lower_word] = 1
+    count = 0
+    while count < 20:
+        for key, value in sorted(word_dict.iteritems(), key=lambda (k,v): (v, k), reverse=True):
+            count = count + 1
+            print "%s: %s" % (key, value)
+
+
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
